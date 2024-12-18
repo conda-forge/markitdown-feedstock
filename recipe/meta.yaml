@@ -1,5 +1,5 @@
 {% set name = "markitdown" %}
-{% set version = "0.0.1a2" %}
+{% set version = "0.0.1a3" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -8,14 +8,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/markitdown-{{ version }}.tar.gz
-  sha256: b4fb8234e01f743d9a31c5191ae446ccf8220b17ee90598323b185c145faa407
+  sha256: f6c8f5f7f5541e91c6c535218318968fefd71e2a6faa0eb782b3492e04cd023d
 
 build:
   entry_points:
     - markitdown = markitdown.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
