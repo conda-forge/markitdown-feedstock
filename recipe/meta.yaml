@@ -39,6 +39,7 @@ requirements:
     - speechrecognition
     - pathvalidate
     - pdfminer-six
+    - openai
 
 test:
   imports:
