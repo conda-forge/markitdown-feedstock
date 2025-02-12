@@ -23,24 +23,28 @@ requirements:
     - hatchling
     - pip
   run:
-    - python >={{ python_min }}
+    - azure-ai-documentintelligence
+    - azure-identity
     - beautifulsoup4
-    - requests
+    - charset-normalizer
     - mammoth
     - markdownify
     - numpy
-    - python-pptx
-    - pandas
-    - openpyxl
-    - pdfminer.six
-    - puremagic
-    - pydub
-    - youtube-transcript-api
-    - speechrecognition
-    - pathvalidate
-    - pdfminer-six
-    - openai
     - olefile
+    - openai
+    - openpyxl
+    - pandas
+    - pathvalidate
+    - pdfminer.six
+    - pdfminer-six
+    - puremagic
+    - python-pptx
+    - python >={{ python_min }}
+    - pydub
+    - requests
+    - speechrecognition
+    - xlrd
+    - youtube-transcript-api
 
 test:
   imports:
