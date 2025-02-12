@@ -1,5 +1,5 @@
 {% set name = "markitdown" %}
-{% set version = "0.0.1a3" %}
+{% set version = "0.0.1a4" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -8,14 +8,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/markitdown-{{ version }}.tar.gz
-  sha256: f6c8f5f7f5541e91c6c535218318968fefd71e2a6faa0eb782b3492e04cd023d
+  sha256: 8bf738cf3d2a26efb0edde9eb109a53886a4550c0df12b17418182cd30ab1dde
 
 build:
   entry_points:
     - markitdown = markitdown.__main__:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
-  number: 1
+  number: 0
 
 requirements:
   host:
@@ -23,23 +23,28 @@ requirements:
     - hatchling
     - pip
   run:
-    - python >={{ python_min }}
+    - azure-ai-documentintelligence
+    - azure-identity
     - beautifulsoup4
-    - requests
+    - charset-normalizer
     - mammoth
     - markdownify
     - numpy
-    - python-pptx
-    - pandas
-    - openpyxl
-    - pdfminer.six
-    - puremagic
-    - pydub
-    - youtube-transcript-api
-    - speechrecognition
-    - pathvalidate
-    - pdfminer-six
+    - olefile
     - openai
+    - openpyxl
+    - pandas
+    - pathvalidate
+    - pdfminer.six
+    - pdfminer-six
+    - puremagic
+    - python-pptx
+    - python >={{ python_min }}
+    - pydub
+    - requests
+    - speechrecognition
+    - xlrd
+    - youtube-transcript-api
 
 test:
   imports:
