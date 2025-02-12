@@ -40,6 +40,7 @@ requirements:
     - pathvalidate
     - pdfminer-six
     - openai
+    - olefile
 
 test:
   imports:
