@@ -1,5 +1,5 @@
 {% set name = "markitdown" %}
-{% set version = "0.0.1a5" %}
+{% set version = "0.0.1" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/markitdown-{{ version }}.tar.gz
-  sha256: c78bdd3b3f11b2188e864b3fe2c7d15355fabcebcda7957f378fb88d4c779152
+  sha256: 54795c3ed3d28fa1d5b7103275b0fa784d992291b9f51963dd912b1eba75be40
 
 build:
   entry_points:
