@@ -45,6 +45,9 @@ requirements:
     - speechrecognition
     - xlrd
     - youtube-transcript-api
+    - beautifulsoup4
+    - magika >0.6.1
+    - charset-normalizer
 
 test:
   imports:
