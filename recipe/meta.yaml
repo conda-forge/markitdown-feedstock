@@ -1,5 +1,5 @@
 {% set name = "markitdown" %}
-{% set version = "0.0.2" %}
+{% set version = "0.1.0" %}
 {% set python_min = "3.10" %}
 
 package:
@@ -8,7 +8,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/markitdown-{{ version }}.tar.gz
-  sha256: 678fc2c9bc4eded0941c01155251982cab1f86c8148c8ac7ca3869116d3d49d7
+  sha256: b43dfdc6629fe2c6b7cf01f890f0350894916e73f6985d507a5225c0a3a39c9d
 
 build:
   entry_points:
@@ -27,6 +27,8 @@ requirements:
     - azure-identity
     - beautifulsoup4
     - charset-normalizer
+    - ffmpeg
+    - magika ~=0.6.1
     - mammoth
     - markdownify
     - numpy
