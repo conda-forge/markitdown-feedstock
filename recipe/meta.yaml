@@ -27,6 +27,8 @@ requirements:
     - azure-identity
     - beautifulsoup4
     - charset-normalizer
+    - ffmpeg
+    - magika !=0.6.1
     - mammoth
     - markdownify
     - numpy
@@ -45,9 +47,6 @@ requirements:
     - speechrecognition
     - xlrd
     - youtube-transcript-api
-    - beautifulsoup4
-    - magika !=0.6.1
-    - charset-normalizer
 
 test:
   imports:
