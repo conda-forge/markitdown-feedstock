@@ -48,7 +48,7 @@ tests:
         - pip
         - python ${{ python_min }}.*
     script:
-      - locust --version
+      - markitdown --help
 
 about:
   summary: Utility tool for converting various files to Markdown
