@@ -7,9 +7,11 @@ Home: https://github.com/microsoft/markitdown
 
 Package license: MIT
 
-Summary: Python tool for converting files and office documents to Markdown.
+Summary: Utility tool for converting various files to Markdown
 
 Development: https://github.com/microsoft/markitdown
+
+Python tool for converting files and office documents to Markdown.
 
 Current build status
 ====================
@@ -34,14 +36,14 @@ Current release info
 Installing markitdown
 =====================
 
-Installing `markitdown` from the `conda-forge/label/markitdown_dev` channel can be achieved by adding `conda-forge/label/markitdown_dev` to your channels with:
+Installing `markitdown` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
-conda config --add channels conda-forge/label/markitdown_dev
+conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge/label/markitdown_dev` channel has been enabled, `markitdown` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `markitdown` can be installed with `conda`:
 
 ```
 conda install markitdown
@@ -56,26 +58,26 @@ mamba install markitdown
 It is possible to list all of the versions of `markitdown` available on your platform with `conda`:
 
 ```
-conda search markitdown --channel conda-forge/label/markitdown_dev
+conda search markitdown --channel conda-forge
 ```
 
 or with `mamba`:
 
 ```
-mamba search markitdown --channel conda-forge/label/markitdown_dev
+mamba search markitdown --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search markitdown --channel conda-forge/label/markitdown_dev
+mamba repoquery search markitdown --channel conda-forge
 
 # List packages depending on `markitdown`:
-mamba repoquery whoneeds markitdown --channel conda-forge/label/markitdown_dev
+mamba repoquery whoneeds markitdown --channel conda-forge
 
 # List dependencies of `markitdown`:
-mamba repoquery depends markitdown --channel conda-forge/label/markitdown_dev
+mamba repoquery depends markitdown --channel conda-forge
 ```
 
 
