@@ -23,43 +23,25 @@ requirements:
     - hatchling
     - pip
   run:
-    - azure-ai-documentintelligence
-    - azure-identity
-    - beautifulsoup4
-    - charset-normalizer
-    - ffmpeg
-    - magika ~=0.6.1
-    - mammoth
-    - markdownify
-    - numpy
-    - olefile
-    - openai
-    - openpyxl
-    - pandas
-    - pathvalidate
-    - pdfminer.six
-    - pdfminer-six
-    - puremagic
-    - python-pptx
     - python >={{ python_min }}
-    - pydub
+    - beautifulsoup4
     - requests
-    - speechrecognition
-    - xlrd
-    - youtube-transcript-api
+    - markdownify
+    - magika >=0.6.1,<0.7.dev0
+    - charset-normalizer
 
 test:
   imports:
     - markitdown
   commands:
     - pip check
+    - markitdown --help
   requires:
     - python {{ python_min }}
     - pip
 
 about:
-  home: https://github.com/microsoft/markitdown
-  summary: Python tool for converting files and office documents to Markdown.
+  summary: Utility tool for converting various files to Markdown
   dev_url: https://github.com/microsoft/markitdown
   license: MIT
   license_file: LICENSE
