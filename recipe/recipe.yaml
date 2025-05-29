@@ -30,10 +30,24 @@ requirements:
   run:
     - python >=${{ python_min }},<${{ python_max }}
     - beautifulsoup4
+    - charset-normalizer
+    - defusedxml
     - requests
     - markdownify
     - magika >=0.6.1,<0.7.dev0
-    - charset-normalizer
+    - python-pptx
+    - mammoth
+    - pandas
+    - openpyxl
+    - xlrd
+    - lxml
+    - pdfminer.six
+    - olefile
+    - pydub
+    - SpeechRecognition
+    - youtube-transcript-api >=1.0.0
+    - azure-ai-documentintelligence
+    - azure-identity
 
 tests:
   - python:
