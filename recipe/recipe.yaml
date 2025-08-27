@@ -40,7 +40,9 @@ requirements:
     - mammoth >=1.10.0
     - olefile
     - openpyxl
-    - onnxruntime <=1.20.1  # [win]
+    - if: win
+      then:
+        - onnxruntime <=1.20.1
     - pandas
     - pdfminer.six
     - pydub
