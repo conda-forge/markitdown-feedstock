@@ -29,25 +29,26 @@ requirements:
     - pip
   run:
     - python >=${{ python_min }},<${{ python_max }}
+    - azure-ai-documentintelligence
+    - azure-identity
     - beautifulsoup4
     - charset-normalizer
     - defusedxml
-    - requests
+    - lxml
     - markdownify
     - magika >=0.6.1,<0.7.dev0
-    - python-pptx
-    - mammoth
-    - pandas
-    - openpyxl
-    - xlrd
-    - lxml
-    - pdfminer.six
+    - mammoth >=1.10.0
     - olefile
+    - openpyxl
+    - onnxruntime <=1.20.1  # [win]
+    - pandas
+    - pdfminer.six
     - pydub
+    - python-pptx
+    - requests
     - SpeechRecognition
+    - xlrd
     - youtube-transcript-api >=1.0.0
-    - azure-ai-documentintelligence
-    - azure-identity
 
 tests:
   - python:
