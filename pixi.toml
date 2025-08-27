@@ -7,7 +7,7 @@
 
 [project]
 name = "markitdown-feedstock"
-version = "3.48.1"  # conda-smithy version used to generate this file
+version = "3.52.0"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/markitdown-feedstock"
 authors = ["@conda-forge/markitdown"]
 channels = ["conda-forge"]
@@ -34,6 +34,7 @@ description = "List contents of markitdown-feedstock packages built for variant 
 
 [feature.smithy.dependencies]
 conda-smithy = "*"
+shellcheck = "*"
 [feature.smithy.tasks.build-locally]
 cmd = "python ./build-locally.py"
 description = "Build packages locally using the same setup scripts used in conda-forge's CI"
