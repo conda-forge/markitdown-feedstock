@@ -13,6 +13,9 @@ Development: https://github.com/microsoft/markitdown
 
 Python tool for converting files and office documents to Markdown.
 
+markitdown installs the optional converter backends as well; use
+markitdown-core for the mandatory dependencies only.
+
 Current build status
 ====================
 
@@ -33,6 +36,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-markitdown-green.svg)](https://anaconda.org/conda-forge/markitdown) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/markitdown.svg)](https://anaconda.org/conda-forge/markitdown) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/markitdown.svg)](https://anaconda.org/conda-forge/markitdown) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/markitdown.svg)](https://anaconda.org/conda-forge/markitdown) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-markitdown--core-green.svg)](https://anaconda.org/conda-forge/markitdown-core) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/markitdown-core.svg)](https://anaconda.org/conda-forge/markitdown-core) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/markitdown-core.svg)](https://anaconda.org/conda-forge/markitdown-core) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/markitdown-core.svg)](https://anaconda.org/conda-forge/markitdown-core) |
 
 Installing markitdown
 =====================
@@ -44,16 +48,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `markitdown` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `markitdown, markitdown-core` can be installed with `conda`:
 
 ```
-conda install markitdown
+conda install markitdown markitdown-core
 ```
 
 or with `mamba`:
 
 ```
-mamba install markitdown
+mamba install markitdown markitdown-core
 ```
 
 It is possible to list all of the versions of `markitdown` available on your platform with `conda`:
