@@ -7,7 +7,7 @@ context:
   python_min: '3.10'
   python_max: '4.0'
 
-package:
+recipe:
   name: ${{ name|lower }}
   version: ${{ version }}
 
@@ -16,60 +16,106 @@ source:
   sha256: 4d1f3c69cd43b82288fdc3653686d759dcf355ee7c681aa6a855aed98a1e4f44
 
 build:
-  number: 0
-  noarch: python
-  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
-  python:
-    entry_points:
-      - markitdown = markitdown.__main__:main
+  number: 1
 
-requirements:
-  host:
-    - python ${{ python_min }}.*
-    - hatchling
-    - pip
-  run:
-    - python >=${{ python_min }},<${{ python_max }}
-    - beautifulsoup4
-    - requests
-    - markdownify
-    # magika 0.6.3's wheel caps onnxruntime<=1.20.1 on win32 (a one-version aberration;
-    # absent in 0.6.1/0.6.2 and 1.0+), which conda can't satisfy on Windows (onnxruntime
-    # 1.26) -> downstream pip check fails. Pin away from 0.6.3 (0.6.2 is clean).
-    - magika >=0.6.1,!=0.6.3,<0.7.0
-    - charset-normalizer
-    - defusedxml
-    # https://github.com/microsoft/markitdown/blob/main/packages/markitdown/pyproject.toml#L35
-  run_constraints:
-    - python-pptx
-    - mammoth >=1.11.0
-    - pandas
-    - openpyxl
-    - xlrd
-    - lxml
-    - pdfminer.six >=20251230
-    - pdfplumber >=0.11.9
-    - olefile
-    - pydub
-    - SpeechRecognition
-    - youtube-transcript-api >=1.0.0
-    - azure-ai-documentintelligence
-    - azure-identity
-
-tests:
-  - python:
-      imports:
-        - markitdown
-      pip_check: true
-      python_version:
-        - ${{ python_min }}.*
-        - "*"
-  - requirements:
-      run:
-        - pip
+# markitdown-core carries the package with only the mandatory dependencies, so
+# every converter that needs an optional backend raises MissingDependencyException.
+# markitdown adds those backends on top, i.e. it is the equivalent of
+# `pip install markitdown[all]` and converts pdf/docx/xlsx/... out of the box.
+# https://github.com/conda-forge/markitdown-feedstock/issues/17
+outputs:
+  - package:
+      name: ${{ name|lower }}-core
+    build:
+      noarch: python
+      script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation --disable-pip-version-check
+      python:
+        entry_points:
+          - markitdown = markitdown.__main__:main
+    requirements:
+      host:
         - python ${{ python_min }}.*
-    script:
-      - markitdown --help
+        - hatchling
+        - pip
+      run:
+        - python >=${{ python_min }},<${{ python_max }}
+        - beautifulsoup4
+        - requests
+        - markdownify
+        # magika 0.6.3's wheel caps onnxruntime<=1.20.1 on win32 (a one-version aberration;
+        # absent in 0.6.1/0.6.2 and 1.0+), which conda can't satisfy on Windows (onnxruntime
+        # 1.26) -> downstream pip check fails. Pin away from 0.6.3 (0.6.2 is clean).
+        - magika >=0.6.1,!=0.6.3,<0.7.0
+        - charset-normalizer
+        - defusedxml
+      # https://github.com/microsoft/markitdown/blob/main/packages/markitdown/pyproject.toml#L35
+      run_constraints:
+        - python-pptx
+        - mammoth >=1.11.0
+        - pandas
+        - openpyxl
+        - xlrd
+        - lxml
+        - pdfminer.six >=20251230
+        - pdfplumber >=0.11.9
+        - olefile
+        - pydub
+        - SpeechRecognition
+        - youtube-transcript-api >=1.0.0
+        - azure-ai-documentintelligence
+        - azure-identity
+    tests:
+      - python:
+          imports:
+            - markitdown
+          pip_check: true
+          python_version:
+            - ${{ python_min }}.*
+            - "*"
+      - requirements:
+          run:
+            - pip
+            - python ${{ python_min }}.*
+        script:
+          - markitdown --help
+
+  - package:
+      name: ${{ name|lower }}
+    build:
+      noarch: generic
+    requirements:
+      run:
+        - ${{ pin_subpackage(name ~ '-core', exact=True) }}
+        - python-pptx
+        - mammoth >=1.11.0
+        - pandas
+        - openpyxl
+        - xlrd
+        - lxml
+        - pdfminer.six >=20251230
+        - pdfplumber >=0.11.9
+        - olefile
+        - youtube-transcript-api >=1.0.0
+        - azure-ai-documentintelligence
+        - azure-identity
+        # deliberately not pulled in, install them alongside markitdown if needed:
+        #  - pydub + SpeechRecognition ([audio-transcription]): speechrecognition is
+        #    capped at python <3.13 on conda-forge and pydub imports the stdlib
+        #    audioop module that 3.13 removed, so either would cap markitdown itself.
+        #  - azure-ai-contentunderstanding ([az-content-understanding]): upstream needs
+        #    >=1.2.0b1 for to_llm_input(), conda-forge only has 1.1.0.
+    tests:
+      - requirements:
+          run:
+            - python ${{ python_min }}.*
+        script:
+          # the converters import their backend lazily and only report the failure
+          # when asked to convert, so check the backends themselves. pdfminer.high_level
+          # in particular fails when pdfminer (dead) shadows pdfminer.six, see issue #17.
+          - python -c "import pdfminer.high_level, pdfplumber"
+          - python -c "import pptx, mammoth, lxml, pandas, openpyxl, xlrd, olefile, youtube_transcript_api"
+          - python -c "import azure.ai.documentintelligence, azure.identity"
+          - python -c "from markitdown import MarkItDown; MarkItDown()"
 
 about:
   summary: Utility tool for converting various files to Markdown
@@ -78,6 +124,9 @@ about:
   homepage: https://github.com/microsoft/markitdown
   description: |
     Python tool for converting files and office documents to Markdown.
+
+    markitdown installs the optional converter backends as well; use
+    markitdown-core for the mandatory dependencies only.
   repository: https://github.com/microsoft/markitdown
 
 extra:
